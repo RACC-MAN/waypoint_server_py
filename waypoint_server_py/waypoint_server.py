@@ -3,10 +3,10 @@ from rclpy.node import Node
 
 from waypoint_server_msg.srv import Command
 
-from waypoint_server/wait_server import WaitServer
-from waypoint_server/skip_server import SkipServer
-from waypoint_server/speak_server import SpeakServer
-from waypoint_server/map_change_server import MapChangeServer
+from waypoint_server_py.wait_server import WaitServer
+from waypoint_server_py.skip_server import SkipServer
+from waypoint_server_py.speak_server import SpeakServer
+from waypoint_server_py.map_change_server import MapChangeServer
 
 class WaypointServer(Node):
     def __init__(self):
