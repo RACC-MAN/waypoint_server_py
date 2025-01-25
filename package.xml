@@ -7,6 +7,10 @@
   <maintainer email="kazulab10969@outlook.jp">kazuma</maintainer>
   <license>TODO: License declaration</license>
 
+  <depend>rclpy</depend>
+  <depend>example_interfaces</depend>
+  <depend>waypoint_server_msgs</depend>
+
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
