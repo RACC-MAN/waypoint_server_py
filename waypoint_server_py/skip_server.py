@@ -10,19 +10,17 @@ import math
 
 class SkipServer(Node):
     def __init__(self):
-        super().__init__(self):
+        super().__init__('skip_server')
         self.get_logger().info('Skip Server Created')
 
         self._serverName = 'skip'
         self._skipAvailable = False
         self.skip_tolerance = 0.0
-        self.timer_freq = 0.5
 
-        self._timer= self.create_timer(self.timer_freq, self.SkipJadge)
-        self._cancelCall = self.create_publisher(String, "nav2_cancel")
+        self._cancelCall = self.create_publisher(Empty, "nav2_cancel", 10)
 
     def Update(self):
-        self.get_logger().info('Skip Server Update')
+        # self.get_logger().info('Skip Server Update')
         self.skipEnable = False
 
     def ServerCall(self, data):
@@ -31,12 +29,12 @@ class SkipServer(Node):
         msg = 'Skip Server Accepted'
         return msg
 
-    def SkipJadge(self)
-        if self._skipAvailable:
-            pass
+    def SkipJadge(self):
+        self.get_logger().warn('Skip Jadge')
+        # if self._skipAvailable:
             #--------------------------
             # Write skip jedge process 
             #--------------------------
-            self._skipAvailable = False
-            self._cancelCall.publish()
+            # self._skipAvailable = False
+            # self._cancelCall.publish()
 

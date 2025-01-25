@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 
-from waypoint_server_msg.srv import Command
+from waypoint_server_msgs.srv import Command
 
 from waypoint_server_py.wait_server import WaitServer
 from waypoint_server_py.skip_server import SkipServer
@@ -11,11 +11,6 @@ from waypoint_server_py.map_change_server import MapChangeServer
 class WaypointServer(Node):
     def __init__(self):
         super().__init__('waypoint_server')
-        self._server = self.create_service(
-            Command,
-            'waypoint_command',
-            self.callback
-        )
 
         self.wait_server = WaitServer()
         self.skip_server = SkipServer()
@@ -23,11 +18,17 @@ class WaypointServer(Node):
         self.map_change_server = MapChangeServer()
         # self.ex_server = Server()
 
+        self._server = self.create_service(
+            Command,
+            'waypoint_command',
+            self.callback
+        )
+
     
     def callback(self, request, response):
         self.get_logger().info('Accepted command')
         command_line = request.command
-        data = command_line.split(',')
+        data = command_line.split(':')
 
         # server update, when waypoint updated
         if data[0] == 'update':
@@ -48,6 +49,10 @@ class WaypointServer(Node):
         # # Example server call
         # elif data[0] == self.ex_server._serverName:
         #     result_msg = self.ex_server.ServerCall(data)
+        else:
+            self.get_logger().warn(f'Wrong command entered : {data[0]}')
+            result_msg = "Waypoint Server Faild"
+
 
         response.message = result_msg
         return response
