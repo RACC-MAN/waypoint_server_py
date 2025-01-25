@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'waypoint_server = waypoint_server_py.waypoint_server:main',
         ],
     },
 )
